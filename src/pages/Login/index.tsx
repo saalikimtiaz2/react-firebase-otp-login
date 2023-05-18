@@ -1,34 +1,11 @@
-import { initializeApp } from 'firebase/app';
 import { RecaptchaVerifier, signInWithPhoneNumber } from 'firebase/auth';
-import { getAuth } from 'firebase/auth';
 import React, { useEffect, useState } from 'react';
 import { TailSpin } from 'react-loader-spinner';
 import OtpInput from 'react-otp-input';
 import PhoneInput from 'react-phone-input-2';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-
-const apiKey = import.meta.env.VITE_APP_FIREBASE_API_KEY;
-const authDomain = import.meta.env.VITE_APP_FIREBASE_AUTH_DOMAIN;
-const projectId = import.meta.env.VITE_APP_FIREBASE_PROJECT_ID;
-const storageBucket = import.meta.env.VITE_APP_FIREBASE_STORAGE_BUCKET;
-const messagingSenderId = import.meta.env.VITE_APP_FIREBASE_MESSAGING_SENDER_ID;
-const appId = import.meta.env.VITE_APP_FIREBASE_APP_ID;
-const measurementId = import.meta.env.VITE_APP_FIREBASE_MEASUREMENT_ID;
-
-const firebaseConfig: any = {
-  apiKey,
-  authDomain,
-  projectId,
-  storageBucket,
-  messagingSenderId,
-  appId,
-  measurementId,
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+import auth from 'utils/firebase';
 
 function Login() {
   const [phone, setPhone] = useState<any>();
@@ -114,7 +91,7 @@ function Login() {
                 inputStyle="rounded flex-1 !mr-0 text-2xl h-8 inline-blocks outline-none text-black border border-white focus:border-rose-500"
                 containerStyle="mb-2 gap-x-2"
                 shouldAutoFocus
-              />
+              ></OtpInput>
               <div className="flex items-center justify-center text-[12px] text-white gap-x-2 mb-4">
                 +{phone}{' '}
                 <button
@@ -143,7 +120,7 @@ function Login() {
                   onChange={(evt: any) => {
                     setPhone(evt);
                   }}
-                />
+                ></PhoneInput>
               </div>
               <button
                 className="w-full flex items-center justify-center gap-x-2 bg-black bg-opacity-30 hover:bg-opacity-50 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline"
