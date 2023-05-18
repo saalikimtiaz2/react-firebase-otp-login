@@ -22,25 +22,25 @@ function Login() {
     }
   }, []);
 
-  const handleOnCaptchaVerify = () => {
-    if (!window.recaptchaVerifier) {
-      window.recaptchaVerifier = new RecaptchaVerifier(
-        'recaptcha-container',
-        {
-          size: 'invisible',
-          callback: () => {
-            handleLogin();
-          },
-          'expired-callback': () => {},
-        },
-        auth,
-      );
-    }
-  };
+  // const handleOnCaptchaVerify = () => {
+  //   if (!window.recaptchaVerifier) {
+  //     window.recaptchaVerifier = new RecaptchaVerifier(
+  //       'recaptcha-container',
+  //       {
+  //         size: 'invisible',
+  //         callback: () => {
+  //           handleLogin();
+  //         },
+  //         'expired-callback': () => {},
+  //       },
+  //       auth,
+  //     );
+  //   }
+  // };
 
   const handleLogin = async () => {
     setLoading(true);
-    handleOnCaptchaVerify();
+    // handleOnCaptchaVerify();
     const appVerifier = window.recaptchaVerifier;
     const formatedPhoneNumber = '+' + phone;
     signInWithPhoneNumber(auth, formatedPhoneNumber, appVerifier)
