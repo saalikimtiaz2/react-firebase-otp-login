@@ -17,12 +17,12 @@ function Login() {
 
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   console.log(window.localStorage.getItem('user'));
-  //   if (window.localStorage.getItem('user') !== null) {
-  //     navigate('/');
-  //   }
-  // }, []);
+  useEffect(() => {
+    console.log(window.localStorage.getItem('user'));
+    if (window.localStorage.getItem('user') !== null) {
+      navigate('/');
+    }
+  }, []);
 
   const handleOnCaptchaVerify = () => {
     if (!window.recaptchaVerifier) {
@@ -77,7 +77,7 @@ function Login() {
 
   return (
     <>
-      <div id="recaptcha-container" />
+      {/* <div id="recaptcha-container" /> */}
       <main className=" bg-gradient-to-b from-blue-500 to-purple-500 flex items-center justify-center h-screen">
         <div className="max-w-sm bg-white bg-opacity-20 backdrop-blur-sm shadow-md rounded px-8 pt-6 pb-8 mb-4">
           <h2 className="text-2xl text-center font-semibold mb-6">Login</h2>
