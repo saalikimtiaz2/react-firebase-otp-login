@@ -7,7 +7,7 @@ const Home = () => {
 
   useEffect(() => {
     if (userData.phoneNumber === undefined) {
-      navigate('/login');
+      // navigate('/login');
     }
   }, []);
 
