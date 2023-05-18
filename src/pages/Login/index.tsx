@@ -1,13 +1,34 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-
+import { initializeApp } from 'firebase/app';
 import { RecaptchaVerifier, signInWithPhoneNumber } from 'firebase/auth';
+import { getAuth } from 'firebase/auth';
 import React, { useEffect, useState } from 'react';
 import { TailSpin } from 'react-loader-spinner';
 import OtpInput from 'react-otp-input';
 import PhoneInput from 'react-phone-input-2';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import auth from 'utils/firebase';
+
+const apiKey = import.meta.env.VITE_APP_FIREBASE_API_KEY;
+const authDomain = import.meta.env.VITE_APP_FIREBASE_AUTH_DOMAIN;
+const projectId = import.meta.env.VITE_APP_FIREBASE_PROJECT_ID;
+const storageBucket = import.meta.env.VITE_APP_FIREBASE_STORAGE_BUCKET;
+const messagingSenderId = import.meta.env.VITE_APP_FIREBASE_MESSAGING_SENDER_ID;
+const appId = import.meta.env.VITE_APP_FIREBASE_APP_ID;
+const measurementId = import.meta.env.VITE_APP_FIREBASE_MEASUREMENT_ID;
+
+const firebaseConfig: any = {
+  apiKey,
+  authDomain,
+  projectId,
+  storageBucket,
+  messagingSenderId,
+  appId,
+  measurementId,
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 
 function Login() {
   const [phone, setPhone] = useState<any>();
@@ -77,7 +98,7 @@ function Login() {
 
   return (
     <>
-      {/* <div id="recaptcha-container" /> */}
+      <div id="recaptcha-container" />
       <main className=" bg-gradient-to-b from-blue-500 to-purple-500 flex items-center justify-center h-screen">
         <div className="max-w-sm bg-white bg-opacity-20 backdrop-blur-sm shadow-md rounded px-8 pt-6 pb-8 mb-4">
           <h2 className="text-2xl text-center font-semibold mb-6">Login</h2>
