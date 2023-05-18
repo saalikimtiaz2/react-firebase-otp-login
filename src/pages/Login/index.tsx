@@ -17,12 +17,12 @@ function Login() {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    console.log(window.localStorage.getItem('user'));
-    if (window.localStorage.getItem('user') !== null) {
-      navigate('/');
-    }
-  }, []);
+  // useEffect(() => {
+  //   console.log(window.localStorage.getItem('user'));
+  //   if (window.localStorage.getItem('user') !== null) {
+  //     navigate('/');
+  //   }
+  // }, []);
 
   const handleOnCaptchaVerify = () => {
     if (!window.recaptchaVerifier) {
