@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const WelcomeScreen = () => {
+const Home = () => {
   const navigate = useNavigate();
   const userData = JSON.parse(window.localStorage.getItem('user') || '{}');
 
@@ -35,4 +35,4 @@ const WelcomeScreen = () => {
   );
 };
 
-export default WelcomeScreen;
+export default Home;

@@ -7,7 +7,7 @@ import OtpInput from 'react-otp-input';
 import PhoneInput from 'react-phone-input-2';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { auth } from 'utils/firebase';
+import auth from 'utils/firebase';
 
 function Login() {
   const [phone, setPhone] = useState<any>();
