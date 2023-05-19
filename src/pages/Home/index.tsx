@@ -1,19 +1,19 @@
-import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const navigate = useNavigate();
-  const userData = JSON.parse(window.localStorage.getItem('user') || '{}');
+  const userData = JSON.parse(window.localStorage.getItem("user") || "{}");
 
   useEffect(() => {
     if (userData.phoneNumber === undefined) {
-      navigate('/login');
+      navigate("/login");
     }
   }, []);
 
   const handleLogout = () => {
-    window.localStorage.removeItem('user');
-    navigate('/login');
+    window.localStorage.removeItem("user");
+    navigate("/login");
   };
 
   return (
@@ -26,7 +26,8 @@ const Home = () => {
       </button>
       <h1 className="text-4xl text-white font-bold mb-4">Welcome</h1>
       <p className="text-lg text-white">
-        Logged in successfully using OTP. Your phone number is {userData.phoneNumber}
+        Logged in successfully using OTP. Your phone number is{" "}
+        {userData.phoneNumber}
       </p>
       <button className="bg-white hover:bg-gray-200 text-gray-800 py-2 px-4 rounded mt-8">
         Get Started

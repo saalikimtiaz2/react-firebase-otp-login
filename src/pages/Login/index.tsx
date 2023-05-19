@@ -1,12 +1,12 @@
-import { RecaptchaVerifier, signInWithPhoneNumber } from 'firebase/auth';
-import React, { useEffect, useState } from 'react';
-import { TailSpin } from 'react-loader-spinner';
-import OtpInput from 'react-otp-input';
-import PhoneInput from 'react-phone-input-2';
-import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
+import { useEffect, useState } from "react";
+import { TailSpin } from "react-loader-spinner";
+import OtpInput from "react-otp-input";
+import PhoneInput from "react-phone-input-2";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
-import auth from '@/utils/firebase';
+import auth from "../../utils/firebase";
 
 const Login = () => {
   const [phone, setPhone] = useState<any>();
@@ -17,24 +17,23 @@ const Login = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(window.localStorage.getItem('user'));
-    if (window.localStorage.getItem('user') !== null) {
-      navigate('/');
+    console.log(window.localStorage.getItem("user"));
+    if (window.localStorage.getItem("user") !== null) {
+      navigate("/");
     }
   }, []);
 
   const handleOnCaptchaVerify = () => {
     if (!window.recaptchaVerifier) {
       window.recaptchaVerifier = new RecaptchaVerifier(
-        'recaptcha-container',
+        "recaptcha-container",
         {
-          size: 'invisible',
+          size: "invisible",
           callback: () => {
             handleLogin();
           },
-          'expired-callback': () => {},
         },
-        auth,
+        auth
       );
     }
   };
@@ -43,16 +42,16 @@ const Login = () => {
     setLoading(true);
     handleOnCaptchaVerify();
     const appVerifier = window.recaptchaVerifier;
-    const formatedPhoneNumber = '+' + phone;
+    const formatedPhoneNumber = "+" + phone;
     signInWithPhoneNumber(auth, formatedPhoneNumber, appVerifier)
       .then((confirmation) => {
         window.confirmationResult = confirmation;
-        toast.success('OTP sent successfully!');
+        toast.success("OTP sent successfully!");
         setLoading(false);
         setShowOtpInput(true);
       })
       .catch((error) => {
-        console.log('error', error);
+        console.log("error", error);
         setLoading(false);
       });
   };
@@ -62,15 +61,18 @@ const Login = () => {
     window.confirmationResult
       .confirm(OTP)
       .then(async (resp: any) => {
-        window.localStorage.setItem('user', JSON.stringify(resp._tokenResponse));
-        toast.success('Logged in successfully!');
+        window.localStorage.setItem(
+          "user",
+          JSON.stringify(resp._tokenResponse)
+        );
+        toast.success("Logged in successfully!");
         setLoading(false);
 
-        navigate('/');
+        navigate("/");
       })
       .catch((error: any) => {
         console.log(error);
-        toast.error('Invalid OTP!');
+        toast.error("Invalid OTP!");
       });
   };
 
@@ -94,7 +96,7 @@ const Login = () => {
                 shouldAutoFocus
               />
               <div className="flex items-center justify-center text-[12px] text-white gap-x-2 mb-4">
-                +{phone}{' '}
+                +{phone}{" "}
                 <button
                   className="text-[12px] text-black"
                   onClick={() => setShowOtpInput(false)}
@@ -108,7 +110,9 @@ const Login = () => {
                 onClick={() => handleVerifyOTP()}
                 disabled={!OTP || loading}
               >
-                {loading && <TailSpin height="20px" width="20px" color="white" />}
+                {loading && (
+                  <TailSpin height="20px" width="20px" color="white" />
+                )}
                 Verify Code
               </button>
             </>
@@ -129,7 +133,9 @@ const Login = () => {
                 onClick={handleLogin}
                 disabled={!phone || loading}
               >
-                {loading && <TailSpin height="20px" width="20px" color="white" />}
+                {loading && (
+                  <TailSpin height="20px" width="20px" color="white" />
+                )}
                 Send Code via SMS
               </button>
             </>

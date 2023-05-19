@@ -1,10 +1,10 @@
-import './styles/global.scss';
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+import "./styles/global.scss";
 
-import React from 'react';
-import { createRoot } from 'react-dom/client';
+import { createRoot } from "react-dom/client";
 
-import App from './App';
+import App from "./App";
 
-const container = document.getElementById('root');
+const container = document.getElementById("root");
 const root = createRoot(container!);
 root.render(<App />);
