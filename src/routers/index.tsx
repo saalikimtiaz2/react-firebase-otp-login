@@ -2,9 +2,9 @@ import React, { lazy, Suspense } from 'react';
 import { TailSpin } from 'react-loader-spinner';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-const Home = lazy(() => import('pages/Home/index'));
-const About = lazy(() => import('pages/About/index'));
-const Login = lazy(() => import('pages/Login/index'));
+const Home = lazy(() => import('@/pages/Home/index'));
+const About = lazy(() => import('@/pages/About/index'));
+const Login = lazy(() => import('@/pages/Login/index'));
 
 function Routers() {
   return (

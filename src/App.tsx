@@ -3,7 +3,8 @@ import 'react-phone-input-2/lib/style.css';
 
 import React from 'react';
 import { ToastContainer } from 'react-toastify';
-import Routers from 'routers';
+
+import Routers from '@/routers';
 
 function App() {
   return (

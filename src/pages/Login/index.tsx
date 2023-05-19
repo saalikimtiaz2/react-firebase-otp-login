@@ -5,9 +5,10 @@ import OtpInput from 'react-otp-input';
 import PhoneInput from 'react-phone-input-2';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import auth from 'utils/firebase';
 
-function Login() {
+import auth from '@/utils/firebase';
+
+const Login = () => {
   const [phone, setPhone] = useState<any>();
   const [OTP, setOTP] = useState();
   const [loading, setLoading] = useState(false);
@@ -22,25 +23,25 @@ function Login() {
     }
   }, []);
 
-  // const handleOnCaptchaVerify = () => {
-  //   if (!window.recaptchaVerifier) {
-  //     window.recaptchaVerifier = new RecaptchaVerifier(
-  //       'recaptcha-container',
-  //       {
-  //         size: 'invisible',
-  //         callback: () => {
-  //           handleLogin();
-  //         },
-  //         'expired-callback': () => {},
-  //       },
-  //       auth,
-  //     );
-  //   }
-  // };
+  const handleOnCaptchaVerify = () => {
+    if (!window.recaptchaVerifier) {
+      window.recaptchaVerifier = new RecaptchaVerifier(
+        'recaptcha-container',
+        {
+          size: 'invisible',
+          callback: () => {
+            handleLogin();
+          },
+          'expired-callback': () => {},
+        },
+        auth,
+      );
+    }
+  };
 
   const handleLogin = async () => {
     setLoading(true);
-    // handleOnCaptchaVerify();
+    handleOnCaptchaVerify();
     const appVerifier = window.recaptchaVerifier;
     const formatedPhoneNumber = '+' + phone;
     signInWithPhoneNumber(auth, formatedPhoneNumber, appVerifier)
@@ -91,7 +92,7 @@ function Login() {
                 inputStyle="rounded flex-1 !mr-0 text-2xl h-8 inline-blocks outline-none text-black border border-white focus:border-rose-500"
                 containerStyle="mb-2 gap-x-2"
                 shouldAutoFocus
-              ></OtpInput>
+              />
               <div className="flex items-center justify-center text-[12px] text-white gap-x-2 mb-4">
                 +{phone}{' '}
                 <button
@@ -120,7 +121,7 @@ function Login() {
                   onChange={(evt: any) => {
                     setPhone(evt);
                   }}
-                ></PhoneInput>
+                />
               </div>
               <button
                 className="w-full flex items-center justify-center gap-x-2 bg-black bg-opacity-30 hover:bg-opacity-50 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline"
@@ -137,6 +138,6 @@ function Login() {
       </main>
     </>
   );
-}
+};
 
 export default Login;
